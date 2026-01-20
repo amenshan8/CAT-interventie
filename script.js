@@ -147,8 +147,8 @@ const slides = [
                 </div>
             </div>
         `,
-        image: "flowchart_viz.png",
-        bg: "flowchart_viz.png"
+        image: null,
+        bg: "search_strategy.png"
     },
     {
         id: 7,
@@ -168,8 +168,8 @@ const slides = [
                 </div>
             </div>
         `,
-        image: "flowchart_viz.png",
-        bg: "flowchart_viz.png"
+        image: null,
+        bg: "title_slide.png"
     },
     {
         id: 8,
@@ -330,17 +330,18 @@ async function renderSlide() {
     }, 500);
 
     const isTitleSlide = slide.id === 1;
+    const hasSideImage = !isTitleSlide && slide.image;
     
     slidesWrapper.innerHTML = `
         <div class="slide-content animate__animated animate__fadeIn">
-            <div class="${isTitleSlide ? 'flex flex-col items-center text-center' : 'slide-grid'}">
-                <div class="content-text">
+            <div class="${isTitleSlide || !slide.image ? 'flex flex-col items-center text-center' : 'slide-grid'}">
+                <div class="content-text w-full">
                     <h1 class="${isTitleSlide ? 'title-main mb-6' : 'text-4xl font-extrabold text-blue-500 mb-6'}">${slide.title}</h1>
                     <div class="text-lg text-gray-200 leading-relaxed">
                         ${slide.content}
                     </div>
                 </div>
-                ${!isTitleSlide ? `
+                ${hasSideImage ? `
                 <div class="slide-image">
                     <img src="${slide.image}" alt="Slide Visual" class="animate__animated animate__zoomIn">
                 </div>` : ''}
